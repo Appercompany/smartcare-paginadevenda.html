@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Care — Por que escolher equipamentos com suporte inteligente?</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050a12;--bg-2:#0a1122;--bg-card:#111c33;
+  --accent:#06d6a0;--accent-2:#00b4d8;--accent-glow:rgba(6,214,160,.15);
+  --danger:#ff6b6b;--amber:#ffd166;--blue:#4ea8de;
+  --text:#f0f4f8;--text-2:#b8c9de;--text-3:#6b8299;--text-4:#3d5471;
+  --border:#1a2d47;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* UTILITY */
+.container{max-width:1100px;margin:0 auto;padding:0 28px}
+.serif{font-family:'Instrument Serif',serif}
+.mono{font-family:'Space Mono',monospace}
+.accent{color:var(--accent)}
+.accent2{color:var(--accent-2)}
+.danger{color:var(--danger)}
+.amber{color:var(--amber)}
+
+/* REVEAL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .3s}
+nav.scrolled{background:rgba(5,10,18,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.nav-name{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase}
+.nav-cta{padding:10px 24px;background:var(--accent);color:#050a12;border:none;border-radius:100px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s;text-decoration:none}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(6,214,160,.3)}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(6,214,160,.06) 0%,transparent 60%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,180,216,.04) 0%,transparent 60%);pointer-events:none}
+
+.hero-content{position:relative;z-index:1}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--accent)}
+
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(40px,6.5vw,72px);line-height:1.05;font-weight:400;margin-bottom:28px;max-width:900px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero h1 .line2{display:block;color:var(--text-2)}
+
+.hero-sub{font-size:clamp(16px,2vw,20px);color:var(--text-2);max-width:640px;line-height:1.7;margin-bottom:40px;font-weight:300}
+
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.btn-main{display:inline-flex;align-items:center;gap:10px;padding:18px 36px;background:var(--accent);color:#050a12;border:none;border-radius:100px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s;text-decoration:none}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 12px 48px rgba(6,214,160,.25)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:18px 36px;background:transparent;color:var(--text-2);border:1px solid var(--border);border-radius:100px;font-size:16px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s;text-decoration:none}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* STATS BAR */
+.stats-bar{display:flex;gap:48px;margin-top:60px;flex-wrap:wrap}
+.stat{text-align:left}
+.stat-value{font-family:'Space Mono',monospace;font-size:32px;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-size:13px;color:var(--text-3);margin-top:4px}
+
+/* ===== PAIN SECTION ===== */
+.pain{padding:100px 0;position:relative}
+.pain::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+.section-eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--danger);margin-bottom:16px}
+.section-title{font-family:'Instrument Serif',serif;font-size:clamp(32px,4.5vw,52px);font-weight:400;line-height:1.15;margin-bottom:20px;max-width:700px}
+.section-sub{font-size:17px;color:var(--text-2);max-width:600px;line-height:1.7;margin-bottom:48px;font-weight:300}
+
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+
+.pain-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;transition:all .4s}
+.pain-card:hover{transform:translateY(-4px);border-color:rgba(255,107,107,.2)}
+.pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--danger);opacity:0;transition:opacity .3s}
+.pain-card:hover::before{opacity:1}
+
+.pain-icon{font-size:36px;margin-bottom:16px;display:block}
+.pain-title{font-size:18px;font-weight:700;margin-bottom:8px}
+.pain-desc{font-size:14px;color:var(--text-3);line-height:1.7}
+.pain-cost{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--danger);margin-top:12px;padding:6px 14px;background:rgba(255,107,107,.08);border-radius:100px;display:inline-block}
+
+/* ===== SOLUTION ===== */
+.solution{padding:100px 0;position:relative}
+.solution::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+.solution-flow{display:flex;align-items:stretch;gap:0;margin-bottom:60px}
+.flow-step{flex:1;text-align:center;padding:28px 16px;position:relative}
+.flow-step::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--text-4);z-index:1}
+.flow-step:last-child::after{display:none}
+.flow-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:8px;letter-spacing:2px}
+.flow-icon{font-size:32px;margin-bottom:8px;display:block}
+.flow-label{font-size:14px;font-weight:600;margin-bottom:4px}
+.flow-desc{font-size:12px;color:var(--text-3)}
+
+@media(max-width:768px){.solution-flow{flex-direction:column;gap:8px}.flow-step::after{content:'↓';right:auto;bottom:-12px;top:auto;left:50%;transform:translateX(-50%)}}
+
+/* ===== BENEFITS ===== */
+.benefits{padding:100px 0}
+.benefits::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+.benefit-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:80px}
+.benefit-row.reverse{direction:rtl}.benefit-row.reverse>*{direction:ltr}
+@media(max-width:800px){.benefit-row,.benefit-row.reverse{grid-template-columns:1fr;gap:32px;direction:ltr}.benefit-row.reverse>*{direction:ltr}}
+
+.benefit-visual{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;overflow:hidden;min-height:280px;display:flex;flex-direction:column;justify-content:center}
+.benefit-visual::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;border-radius:50%;filter:blur(80px);pointer-events:none}
+.bv-green::before{background:rgba(6,214,160,.08)}.bv-blue::before{background:rgba(0,180,216,.08)}.bv-amber::before{background:rgba(255,209,102,.08)}
+
+.benefit-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.benefit-title{font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,38px);font-weight:400;line-height:1.2;margin-bottom:16px}
+.benefit-desc{font-size:15px;color:var(--text-2);line-height:1.7;margin-bottom:20px}
+.benefit-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.benefit-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-2)}
+.benefit-list li .check{color:var(--accent);font-weight:700;flex-shrink:0;margin-top:2px}
+
+/* MOCKUP INSIDE BENEFIT */
+.mini-dashboard{background:var(--bg-2);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:12px}
+.mini-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)}
+.mini-row:last-child{border-bottom:none}
+.mini-label{color:var(--text-3)}
+.mini-value{font-weight:600}
+.mini-value.green{color:var(--accent)}.mini-value.red{color:var(--danger)}.mini-value.amber{color:var(--amber)}
+
+.mini-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.mini-kpi{background:rgba(6,214,160,.06);border:1px solid rgba(6,214,160,.1);border-radius:8px;padding:10px;text-align:center}
+.mini-kpi-val{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--accent)}
+.mini-kpi-label{font-size:9px;color:var(--text-3);text-transform:uppercase;letter-spacing:.5px}
+
+/* PHONE MOCKUP */
+.phone-mock{width:200px;margin:0 auto;background:var(--bg-2);border:2px solid var(--border);border-radius:24px;padding:12px;position:relative}
+.phone-notch{width:60px;height:6px;background:var(--border);border-radius:100px;margin:0 auto 12px}
+.phone-screen{background:var(--bg);border-radius:14px;overflow:hidden;padding:12px;min-height:220px}
+.phone-item{display:flex;align-items:center;gap:8px;padding:8px;background:var(--bg-card);border-radius:8px;margin-bottom:6px;font-size:10px}
+.phone-item-icon{font-size:16px}
+.phone-item-text{font-weight:600;font-size:10px}
+.phone-item-sub{font-size:8px;color:var(--text-3)}
+
+/* ===== COMPARISON ===== */
+.comparison{padding:100px 0;position:relative}
+.comparison::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:48px}
+.compare-table th{padding:20px 24px;font-size:14px;font-weight:700;text-align:left;border-bottom:2px solid var(--border)}
+.compare-table th:first-child{color:var(--text-3);font-weight:500}
+.compare-table th.old{color:var(--danger);background:rgba(255,107,107,.03)}
+.compare-table th.new{color:var(--accent);background:rgba(6,214,160,.03)}
+.compare-table td{padding:16px 24px;border-bottom:1px solid var(--border);font-size:14px;color:var(--text-2)}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td:nth-child(2){color:var(--text-3)}
+.compare-table td:nth-child(3){color:var(--text);font-weight:600}
+
+/* ===== TESTIMONIAL ===== */
+.testimonial{padding:100px 0;position:relative}
+.testimonial::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+.testimonial-card{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:48px;max-width:700px;margin:0 auto;text-align:center;position:relative}
+.testimonial-card::before{content:'"';position:absolute;top:16px;left:32px;font-family:'Instrument Serif',serif;font-size:100px;color:rgba(6,214,160,.15);line-height:1}
+.testimonial-quote{font-family:'Instrument Serif',serif;font-size:clamp(20px,3vw,28px);font-style:italic;line-height:1.5;margin-bottom:24px;position:relative;z-index:1}
+.testimonial-author{font-size:14px;font-weight:600}
+.testimonial-role{font-size:13px;color:var(--text-3)}
+
+/* ===== CTA ===== */
+.cta-section{padding:100px 0;text-align:center;position:relative}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(6,214,160,.06) 0%,transparent 60%);pointer-events:none}
+
+.cta-title{font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,56px);font-weight:400;line-height:1.15;margin-bottom:20px}
+.cta-sub{font-size:18px;color:var(--text-2);max-width:560px;margin:0 auto 40px;line-height:1.7;font-weight:300}
+
+.cta-features{display:flex;justify-content:center;gap:32px;margin-bottom:40px;flex-wrap:wrap}
+.cta-feature{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-2)}
+.cta-feature .check{color:var(--accent);font-size:16px}
+
+/* FOOTER */
+footer{padding:40px 0;border-top:1px solid var(--border);text-align:center}
+footer p{font-size:12px;color:var(--text-4)}
+.footer-brand{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;margin-bottom:8px}
+
+/* DEMO CARDS */
+#demos a:hover{transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,0,0,.3)}
+#demos a:hover>div:first-child{opacity:1!important}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+<div class="nav-inner">
+<div class="nav-brand"><div class="nav-logo">⚕️</div><span class="nav-name">Smart Care</span></div>
+<a href="#cta" class="nav-cta">Solicitar Demonstração</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="container">
+<div class="hero-content">
+<div class="hero-eyebrow reveal">Para hospitais e clínicas</div>
+<h1 class="reveal reveal-delay-1">Você compra o equipamento.<br><span class="line2">E se ele viesse com</span> <em>inteligência?</em></h1>
+<p class="hero-sub reveal reveal-delay-2">Imagine escanear um QR Code no seu equipamento e ter acesso instantâneo a suporte técnico, treinamento, manutenção preventiva e histórico completo. Sem ligação. Sem espera. Sem papel.</p>
+<div class="hero-ctas reveal reveal-delay-3">
+<a href="#cta" class="btn-main">Quero ver na prática →</a>
+<a href="#como" class="btn-ghost">Como funciona?</a>
+</div>
+<div class="stats-bar reveal reveal-delay-4">
+<div class="stat"><div class="stat-value">73%</div><div class="stat-label">menos falhas inesperadas</div></div>
+<div class="stat"><div class="stat-value">2min</div><div class="stat-label">para abrir um chamado</div></div>
+<div class="stat"><div class="stat-value">94%</div><div class="stat-label">conformidade ANVISA</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PAIN -->
+<section class="pain">
+<div class="container">
+<div class="section-eyebrow reveal">O problema que ninguém fala</div>
+<h2 class="section-title reveal reveal-delay-1">Depois que o equipamento <span class="danger">chega no hospital</span>, o fabricante <span class="danger">desaparece.</span></h2>
+<p class="section-sub reveal reveal-delay-2">Você investe centenas de milhares de reais em equipamentos hospitalares. Mas quando precisa de suporte, treinamento ou manutenção...</p>
+
+<div class="pain-grid">
+<div class="pain-card reveal reveal-delay-1">
+<span class="pain-icon">📞</span>
+<div class="pain-title">Suporte demorado</div>
+<div class="pain-desc">Liga pro fabricante, cai na central, transferem 3 vezes, pedem o número de série que ninguém sabe de cabeça. O equipamento fica parado.</div>
+<div class="pain-cost">⏱️ 30 a 60 min por chamado</div>
+</div>
+<div class="pain-card reveal reveal-delay-2">
+<span class="pain-icon">📋</span>
+<div class="pain-title">Manutenção esquecida</div>
+<div class="pain-desc">A preventiva vence, ninguém avisa, ninguém agenda. Quando percebe, o equipamento já quebrou e a garantia foi invalidada.</div>
+<div class="pain-cost">💸 R$ 2.000 a R$ 5.000/ano perdidos</div>
+</div>
+<div class="pain-card reveal reveal-delay-3">
+<span class="pain-icon">👩‍⚕️</span>
+<div class="pain-title">Equipe sem treinamento</div>
+<div class="pain-desc">A enfermeira nova não sabe operar o foco cirúrgico. O manual está numa gaveta. O técnico que instalou não está mais disponível.</div>
+<div class="pain-cost">⚠️ Risco de dano ao equipamento</div>
+</div>
+<div class="pain-card reveal reveal-delay-4">
+<span class="pain-icon">📄</span>
+<div class="pain-title">Compliance comprometido</div>
+<div class="pain-desc">Auditoria ANVISA ou ONA pede registros de manutenção e checklists. O engenheiro clínico precisa de dias para montar tudo.</div>
+<div class="pain-cost">🏥 Risco de certificação</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution" id="como">
+<div class="container">
+<div class="section-eyebrow reveal" style="color:var(--accent)">A solução</div>
+<h2 class="section-title reveal reveal-delay-1">Um <span class="accent">QR Code</span> no equipamento.<br>Todo o suporte na <span class="accent">palma da mão.</span></h2>
+<p class="section-sub reveal reveal-delay-2">Ao comprar equipamentos de um fabricante que utiliza o Smart Care, cada equipamento vem com um QR Code inteligente. Basta escanear.</p>
+
+<div class="solution-flow reveal reveal-delay-3">
+<div class="flow-step"><div class="flow-num">01</div><span class="flow-icon">📦</span><div class="flow-label">Equipamento chega</div><div class="flow-desc">Já com QR Code da fábrica</div></div>
+<div class="flow-step"><div class="flow-num">02</div><span class="flow-icon">👷</span><div class="flow-label">Instalação</div><div class="flow-desc">Técnico ativa no Smart Care</div></div>
+<div class="flow-step"><div class="flow-num">03</div><span class="flow-icon">📱</span><div class="flow-label">Escaneou, resolveu</div><div class="flow-desc">Suporte instantâneo via QR</div></div>
+<div class="flow-step"><div class="flow-num">04</div><span class="flow-icon">🤖</span><div class="flow-label">Automação</div><div class="flow-desc">Alertas e relatórios 24/7</div></div>
+<div class="flow-step"><div class="flow-num">05</div><span class="flow-icon">✅</span><div class="flow-label">Conformidade</div><div class="flow-desc">ANVISA e ONA em 1 clique</div></div>
+</div>
+</div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" id="beneficios">
+<div class="container">
+
+<!-- BENEFIT 1: QR CODE -->
+<div class="benefit-row reveal">
+<div>
+<div class="benefit-eyebrow">Para a equipe de enfermagem</div>
+<div class="benefit-title">Escaneou o QR Code?<br><span class="accent">Problema resolvido.</span></div>
+<div class="benefit-desc">A enfermeira não precisa ligar pra ninguém. Escaneia o QR Code com o celular e tem acesso imediato a tudo que precisa sobre aquele equipamento.</div>
+<ul class="benefit-list">
+<li><span class="check">✓</span> Vídeos curtos de treinamento (como ajustar, limpar, operar)</li>
+<li><span class="check">✓</span> Abrir chamado de manutenção em 1 clique — sem ligar</li>
+<li><span class="check">✓</span> Checklist de turno digital (substitui papel)</li>
+<li><span class="check">✓</span> Histórico completo: manutenções, chamados, peças trocadas</li>
+<li><span class="check">✓</span> Dados do equipamento preenchidos automaticamente</li>
+</ul>
+</div>
+<div class="benefit-visual bv-green">
+<div class="phone-mock">
+<div class="phone-notch"></div>
+<div class="phone-screen">
+<div style="text-align:center;margin-bottom:8px"><span style="font-size:24px">✅</span><br><span style="font-size:9px;color:var(--accent);font-weight:700">QR Code lido</span></div>
+<div style="font-size:11px;font-weight:700;text-align:center;margin-bottom:10px">Foco Cirúrgico LED<br><span style="font-size:9px;color:var(--text-3)">CC — Sala 03</span></div>
+<div class="phone-item"><span class="phone-item-icon">📖</span><div><div class="phone-item-text">Treinamento</div><div class="phone-item-sub">5 vídeos disponíveis</div></div></div>
+<div class="phone-item"><span class="phone-item-icon">🔴</span><div><div class="phone-item-text">Solicitar Manutenção</div><div class="phone-item-sub">Chamado em 1 clique</div></div></div>
+<div class="phone-item"><span class="phone-item-icon">📋</span><div><div class="phone-item-text">Checklist do Turno</div><div class="phone-item-sub">6 itens • 2 min</div></div></div>
+<div class="phone-item"><span class="phone-item-icon">📊</span><div><div class="phone-item-text">Histórico</div><div class="phone-item-sub">Prontuário completo</div></div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- BENEFIT 2: ENGENHEIRO CLÍNICO -->
+<div class="benefit-row reverse reveal">
+<div>
+<div class="benefit-eyebrow">Para o engenheiro clínico</div>
+<div class="benefit-title">Dashboard completo.<br><span class="accent2">Compliance em 1 clique.</span></div>
+<div class="benefit-desc">O engenheiro clínico ganha um portal com visão total do parque de equipamentos. Chega de planilha, pasta e papel pra montar relatório de auditoria.</div>
+<ul class="benefit-list">
+<li><span class="check">✓</span> Todos os equipamentos num só painel com filtros</li>
+<li><span class="check">✓</span> Alertas automáticos de manutenção e garantia</li>
+<li><span class="check">✓</span> Relatório de conformidade ANVISA/ONA em PDF — 1 botão</li>
+<li><span class="check">✓</span> Histórico de checklists preenchidos pela enfermagem</li>
+<li><span class="check">✓</span> Tempo médio de atendimento e taxa de resolução</li>
+</ul>
+</div>
+<div class="benefit-visual bv-blue">
+<div class="mini-dashboard">
+<div class="mini-kpis">
+<div class="mini-kpi"><div class="mini-kpi-val">24</div><div class="mini-kpi-label">Equipamentos</div></div>
+<div class="mini-kpi"><div class="mini-kpi-val">94%</div><div class="mini-kpi-label">Compliance</div></div>
+<div class="mini-kpi"><div class="mini-kpi-val">3.8h</div><div class="mini-kpi-label">Tempo médio</div></div>
+</div>
+<div class="mini-row"><span class="mini-label">Garantias ativas</span><span class="mini-value green">19/24 (79%)</span></div>
+<div class="mini-row"><span class="mini-label">Manutenções em dia</span><span class="mini-value green">94%</span></div>
+<div class="mini-row"><span class="mini-label">Próx. manutenção</span><span class="mini-value amber">15/03 — Foco LED</span></div>
+<div class="mini-row"><span class="mini-label">Chamados abertos</span><span class="mini-value">1</span></div>
+<div class="mini-row"><span class="mini-label">Checklists mês</span><span class="mini-value green">287/300 (95.7%)</span></div>
+</div>
+</div>
+</div>
+
+<!-- BENEFIT 3: DIRETORIA -->
+<div class="benefit-row reveal">
+<div>
+<div class="benefit-eyebrow">Para a diretoria</div>
+<div class="benefit-title">Reduza custos.<br><span class="amber">Aumente a vida útil.</span></div>
+<div class="benefit-desc">Equipamento com manutenção preventiva em dia dura até 40% mais. Equipamento com garantia renovada custa 70% menos que trocar. O Smart Care garante que nada passe batido.</div>
+<ul class="benefit-list">
+<li><span class="check">✓</span> Manutenções preventivas nunca mais são esquecidas</li>
+<li><span class="check">✓</span> Garantias renovadas antes de vencer (com desconto)</li>
+<li><span class="check">✓</span> Redução de paradas inesperadas do equipamento</li>
+<li><span class="check">✓</span> Dados reais para decisão de compra e renovação</li>
+<li><span class="check">✓</span> ROI claro: cada real investido em prevenção economiza R$ 5 em corretiva</li>
+</ul>
+</div>
+<div class="benefit-visual bv-amber">
+<div style="text-align:center;padding:20px 0">
+<div style="font-size:14px;color:var(--text-3);margin-bottom:8px">Economia estimada por ano</div>
+<div style="font-family:'Space Mono',monospace;font-size:48px;font-weight:700;color:var(--amber);line-height:1">R$ 45k</div>
+<div style="font-size:13px;color:var(--text-3);margin-top:4px">para um parque de 24 equipamentos</div>
+<div style="display:flex;justify-content:center;gap:16px;margin-top:24px">
+<div style="text-align:center"><div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--danger)">-73%</div><div style="font-size:10px;color:var(--text-3)">falhas inesperadas</div></div>
+<div style="text-align:center"><div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--accent)">+40%</div><div style="font-size:10px;color:var(--text-3)">vida útil</div></div>
+<div style="text-align:center"><div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--accent-2)">100%</div><div style="font-size:10px;color:var(--text-3)">compliance</div></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison">
+<div class="container">
+<div class="section-eyebrow reveal" style="color:var(--accent-2)">Antes vs. Depois</div>
+<h2 class="section-title reveal reveal-delay-1">O que muda quando seu fabricante<br>usa o <span class="accent">Smart Care</span></h2>
+
+<table class="compare-table reveal reveal-delay-2">
+<thead><tr><th></th><th class="old">❌ Sem Smart Care</th><th class="new">✅ Com Smart Care</th></tr></thead>
+<tbody>
+<tr><td>Abrir chamado</td><td>Liga, espera, repete dados</td><td><strong>1 clique no QR Code</strong></td></tr>
+<tr><td>Tempo de resposta</td><td>30-60 minutos</td><td><strong>Menos de 2 minutos</strong></td></tr>
+<tr><td>Manutenção preventiva</td><td>Esquecida ou atrasada</td><td><strong>Alertas automáticos 30/60/90 dias</strong></td></tr>
+<tr><td>Treinamento</td><td>Manual numa gaveta</td><td><strong>Vídeos no QR Code do equipamento</strong></td></tr>
+<tr><td>Checklist de turno</td><td>Papel ou não existe</td><td><strong>Digital, registrado, rastreável</strong></td></tr>
+<tr><td>Relatório ANVISA</td><td>Dias montando planilha</td><td><strong>PDF gerado em 1 clique</strong></td></tr>
+<tr><td>Histórico equipamento</td><td>Fragmentado, incompleto</td><td><strong>Prontuário digital completo</strong></td></tr>
+<tr><td>Garantia</td><td>Descobre que venceu quando quebra</td><td><strong>Alerta + oferta de renovação</strong></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+<div class="container">
+<div class="testimonial-card reveal">
+<div class="testimonial-quote">Desde que nosso fabricante implantou o Smart Care, minha equipe resolveu mais problemas em 1 mês do que no ano inteiro anterior. O QR Code mudou completamente a forma como interagimos com os equipamentos.</div>
+<div class="testimonial-author">Dr. Ricardo Costa</div>
+<div class="testimonial-role">Engenheiro Clínico — Hospital Regional do Vale</div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+<div class="container">
+<h2 class="cta-title reveal">Na hora de escolher seu<br>próximo equipamento, <em class="serif accent">escolha inteligente.</em></h2>
+<p class="cta-sub reveal reveal-delay-1">Pergunte ao fabricante: "Vocês oferecem o Smart Care?" Se a resposta for sim, você está comprando muito mais do que um equipamento — está comprando tranquilidade.</p>
+
+<div class="cta-features reveal reveal-delay-2">
+<div class="cta-feature"><span class="check">✓</span> Sem custo adicional para o hospital</div>
+<div class="cta-feature"><span class="check">✓</span> Funciona com qualquer celular</div>
+<div class="cta-feature"><span class="check">✓</span> Ativação em minutos</div>
+</div>
+
+<div class="reveal reveal-delay-3" style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:48px">
+<a href="#demos" class="btn-main" style="font-size:18px;padding:20px 44px">👇 Ver Demonstração ao Vivo</a>
+<a href="#" class="btn-ghost">📞 Falar com Consultor</a>
+</div>
+
+<p class="reveal reveal-delay-4" style="margin-top:0;font-size:13px;color:var(--text-4)">Ou pergunte ao seu representante comercial sobre equipamentos com Smart Care integrado.</p>
+</div>
+</section>
+
+<!-- DEMOS -->
+<section id="demos" style="padding:100px 0;position:relative">
+<div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)"></div>
+<div class="container">
+<div class="section-eyebrow reveal" style="color:var(--accent)">Veja funcionando</div>
+<h2 class="section-title reveal reveal-delay-1">Experimente cada módulo<br>do <span class="accent">Smart Care</span></h2>
+<p class="section-sub reveal reveal-delay-2">Clique para abrir os protótipos interativos. Tudo que seu hospital terá acesso ao escolher um fabricante com Smart Care.</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px">
+
+<a href="https://appercompany.github.io/instalador.html/" target="_blank" class="reveal reveal-delay-1" style="background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-decoration:none;color:var(--text);transition:all .4s;display:flex;flex-direction:column;position:relative;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity .3s"></div>
+<span style="font-size:36px;margin-bottom:14px">👷</span>
+<span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:8px">Etapa 1 — Instalação</span>
+<span style="font-size:18px;font-weight:700;margin-bottom:6px">App do Instalador</span>
+<span style="font-size:13px;color:var(--text-3);line-height:1.6;flex:1">O técnico escaneia o QR Code, registra seu hospital, ativa a garantia e o Smart Care começa a funcionar.</span>
+<span style="font-size:13px;font-weight:700;color:var(--accent);margin-top:14px;display:flex;align-items:center;gap:6px">Abrir protótipo →</span>
+</a>
+
+<a href="https://appercompany.github.io/smartcare-qrcode.html/" target="_blank" class="reveal reveal-delay-2" style="background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-decoration:none;color:var(--text);transition:all .4s;display:flex;flex-direction:column;position:relative;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent-2);opacity:0;transition:opacity .3s"></div>
+<span style="font-size:36px;margin-bottom:14px">📱</span>
+<span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent-2);text-transform:uppercase;margin-bottom:8px">Etapa 2 — Uso Diário</span>
+<span style="font-size:18px;font-weight:700;margin-bottom:6px">App da Enfermeira</span>
+<span style="font-size:13px;color:var(--text-3);line-height:1.6;flex:1">A enfermeira escaneia o QR Code e tem treinamento, chamado em 1 clique, checklist de turno e histórico.</span>
+<span style="font-size:13px;font-weight:700;color:var(--accent-2);margin-top:14px;display:flex;align-items:center;gap:6px">Abrir protótipo →</span>
+</a>
+
+<a href="https://appercompany.github.io/smartcare/" target="_blank" class="reveal reveal-delay-3" style="background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-decoration:none;color:var(--text);transition:all .4s;display:flex;flex-direction:column;position:relative;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);opacity:0;transition:opacity .3s"></div>
+<span style="font-size:36px;margin-bottom:14px">🏥</span>
+<span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px">Etapa 3 — Gestão</span>
+<span style="font-size:18px;font-weight:700;margin-bottom:6px">Portal do Eng. Clínico</span>
+<span style="font-size:13px;color:var(--text-3);line-height:1.6;flex:1">Dashboard com todos os equipamentos, garantias, manutenções, checklists e relatório ANVISA em 1 clique.</span>
+<span style="font-size:13px;font-weight:700;color:var(--blue);margin-top:14px;display:flex;align-items:center;gap:6px">Abrir protótipo →</span>
+</a>
+
+<a href="https://appercompany.github.io/smartcare-etiqueta.html/" target="_blank" class="reveal reveal-delay-4" style="background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;text-decoration:none;color:var(--text);transition:all .4s;display:flex;flex-direction:column;position:relative;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber);opacity:0;transition:opacity .3s"></div>
+<span style="font-size:36px;margin-bottom:14px">🏷️</span>
+<span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px">O QR Code</span>
+<span style="font-size:18px;font-weight:700;margin-bottom:6px">Adesivo no Equipamento</span>
+<span style="font-size:13px;color:var(--text-3);line-height:1.6;flex:1">Veja como é o adesivo inteligente que vem colado em cada equipamento direto da fábrica.</span>
+<span style="font-size:13px;font-weight:700;color:var(--amber);margin-top:14px;display:flex;align-items:center;gap:6px">Ver mockup →</span>
+</a>
+
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="footer-brand">⚕️ SMART CARE</div>
+<p>Sistema Inteligente de Pós-Venda para Equipamentos Hospitalares<br>© 2026 — Todos os direitos reservados</p>
+</div>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
+
+// Reveal on scroll
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
